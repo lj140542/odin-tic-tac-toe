@@ -1,3 +1,51 @@
 body {
   font-family: 'Poppins', sans-serif;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  margin: 0px;
+  gap: 0px;
+  height: 100vh;
+  background-color: #EEEEEE;
+}
+
+header {
+  padding: 10px 0px 10px 50px;
+  display: flex;
+  background-color: white;
+  border-bottom: solid 1px #333333;
+}
+
+.board-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  box-shadow: rgb(0 0 0 / 24%) 0px 1px 2px;
+}
+
+.board button {
+  border: 0;
+  width: max(100px, 10vw);
+  aspect-ratio: 1;
+  font-size: 3rem;
+}
+
+.board :nth-child(2),
+.board :nth-child(5),
+.board :nth-child(8) {
+  border-left: solid 1px#333333;
+  border-right: solid 1px#333333;
+}
+
+.board :nth-child(4),
+.board :nth-child(5),
+.board :nth-child(6) {
+  border-top: solid 1px#333333;
+  border-bottom: solid 1px#333333;
 }
