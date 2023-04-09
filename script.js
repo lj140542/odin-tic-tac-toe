@@ -22,15 +22,7 @@ const DisplayController = (() => {
   const displayTurn = () => {
     turnDisplay.innerHTML = `${currentPlayer.getName()} turn`;
   };
-  const turnPlayed = (buttonId) => {
-    button = document.getElementById(buttonId);
-    if (button.innerHTML == '') {
-      button.innerHTML = currentPlayer.getSymbol();
-      currentPlayer = currentPlayer === player1 ? player2 : player1;
-      displayTurn();
-    }
-  };
-  return { displayBoard, resetBoard, displayTurn, turnPlayed };
+  return { displayBoard, resetBoard, displayTurn };
 })();
 
 const GameBoard = (() => {
@@ -39,7 +31,15 @@ const GameBoard = (() => {
   const reset = () => {
     GameArray = [];
   };
-  return { getGameArray, reset };
+  const turnPlayed = (buttonId) => {
+    button = document.getElementById(buttonId);
+    if (button.innerHTML == '') {
+      button.innerHTML = currentPlayer.getSymbol();
+      currentPlayer = currentPlayer === player1 ? player2 : player1;
+      DisplayController.displayTurn();
+    }
+  };
+  return { getGameArray, reset, turnPlayed };
 })();
 
 const player1 = Player('Player 1', 'X');
@@ -47,7 +47,7 @@ const player2 = Player('Player 2', 'O');
 let currentPlayer = player1;
 
 Array.from(buttons).forEach(button => {
-  button.addEventListener('click', e => DisplayController.turnPlayed(e.target.id))
+  button.addEventListener('click', e => GameBoard.turnPlayed(e.target.id))
 });
 
 DisplayController.displayTurn();
