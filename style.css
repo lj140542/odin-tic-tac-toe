@@ -34,6 +34,7 @@ header {
   width: max(100px, 10vw);
   aspect-ratio: 1;
   font-size: 3rem;
+  background-color: transparent;
 }
 
 .board :nth-child(2),
