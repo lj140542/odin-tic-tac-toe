@@ -7,6 +7,7 @@ body {
   gap: 0px;
   height: 100vh;
   background-color: #EEEEEE;
+  color: #333333;
 }
 
 header {
@@ -17,12 +18,29 @@ header {
 }
 
 .board-container {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
   justify-content: center;
 }
 
+#display {
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#display button {
+  display: none;
+}
+
 .board {
+  justify-self: center;
+  align-self: start;
+  margin-top: 10vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -35,6 +53,7 @@ header {
   aspect-ratio: 1;
   font-size: 3rem;
   background-color: transparent;
+  color: #333333;
 }
 
 .board :nth-child(2),
