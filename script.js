@@ -28,6 +28,8 @@ const DisplayController = (() => {
     buttons.forEach(button => {
       if (winningArray.indexOf(button.id) == -1) {
         button.classList.toggle('shrink');
+        button.removeEventListener('click', GameBoard.turnPlayed);
+        button.addEventListener('click', GameBoard.restart);
       }
     });
   };
@@ -35,6 +37,8 @@ const DisplayController = (() => {
     turnDisplay.innerHTML = 'Draw !';
     buttons.forEach(button => {
       button.classList.toggle('shrink');
+      button.removeEventListener('click', GameBoard.turnPlayed);
+      button.addEventListener('click', GameBoard.restart);
     });
   };
   return { displayBoard, displayTurn, displayVictory, displayDraw };
@@ -44,7 +48,8 @@ const GameBoard = (() => {
   let gameArray = [['', '', ''], ['', '', ''], ['', '', '']];
   let turnCpt = 1;
   const getGameArray = () => gameArray;
-  const turnPlayed = (buttonId) => {
+  const turnPlayed = (event) => {
+    let buttonId = event.target.id;
     let button = document.getElementById(buttonId);
     let row = button.dataset.row - 1;
     let col = button.dataset.col - 1;
@@ -101,7 +106,22 @@ const GameBoard = (() => {
 
     return [];
   };
-  return { getGameArray, turnPlayed };
+  const restart = () => {
+    gameArray = [['', '', ''], ['', '', ''], ['', '', '']];
+    turnCpt = 1;
+    currentPlayer = player1;
+
+    buttons.forEach(button => {
+      button.classList.remove('shrink');
+      button.removeEventListener('click', GameBoard.restart);
+      button.addEventListener('click', GameBoard.turnPlayed)
+    });
+
+    DisplayController.displayTurn();
+    DisplayController.displayBoard();
+
+  };
+  return { getGameArray, turnPlayed, restart };
 })();
 
 const buttons = Array.from(document.getElementsByClassName('board-button'));
@@ -111,7 +131,7 @@ const player2 = Player('Player 2', 'O');
 let currentPlayer = player1;
 
 buttons.forEach(button => {
-  button.addEventListener('click', e => GameBoard.turnPlayed(e.target.id))
+  button.addEventListener('click', GameBoard.turnPlayed);
 });
 
 DisplayController.displayTurn();
