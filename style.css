@@ -33,8 +33,14 @@ header {
   align-items: center;
 }
 
-#display button {
-  display: none;
+#restart-instructions {
+  margin: 0px;
+  transform: scale(0);
+  transition: 0.3s;
+}
+
+#restart-instructions.visible {
+  transform: scale(1);
 }
 
 .board {
@@ -72,6 +78,6 @@ header {
 }
 
 .board button.shrink {
-  color:rgb(0 0 0 / 24%);
+  color: rgb(0 0 0 / 24%);
   font-size: 2rem;
 }

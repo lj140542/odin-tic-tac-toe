@@ -25,6 +25,7 @@ const DisplayController = (() => {
   };
   const displayVictory = (winningArray) => {
     turnDisplay.innerHTML = `${currentPlayer.getName()} wins !`;
+    restartInstructions.classList.add('visible');
     buttons.forEach(button => {
       if (winningArray.indexOf(button.id) == -1) {
         button.classList.toggle('shrink');
@@ -35,6 +36,7 @@ const DisplayController = (() => {
   };
   const displayDraw = () => {
     turnDisplay.innerHTML = 'Draw !';
+    restartInstructions.classList.add('visible');
     buttons.forEach(button => {
       button.classList.toggle('shrink');
       button.removeEventListener('click', GameBoard.turnPlayed);
@@ -111,6 +113,7 @@ const GameBoard = (() => {
     turnCpt = 1;
     currentPlayer = player1;
 
+    restartInstructions.classList.remove('visible');
     buttons.forEach(button => {
       button.classList.remove('shrink');
       button.removeEventListener('click', GameBoard.restart);
@@ -126,6 +129,7 @@ const GameBoard = (() => {
 
 const buttons = Array.from(document.getElementsByClassName('board-button'));
 const turnDisplay = document.getElementById('display-turn');
+const restartInstructions = document.getElementById('restart-instructions');
 const player1 = Player('Player 1', 'X');
 const player2 = Player('Player 2', 'O');
 let currentPlayer = player1;
