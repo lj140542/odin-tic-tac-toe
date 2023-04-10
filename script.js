@@ -36,10 +36,14 @@ const GameBoard = (() => {
     gameArray = [];
   };
   const turnPlayed = (buttonId) => {
-    button = document.getElementById(buttonId);
-    if (button.innerHTML == '') {
-      button.innerHTML = currentPlayer.getSymbol();
+    let button = document.getElementById(buttonId);
+    let row = button.dataset.row-1;
+    let col = button.dataset.col-1;
+
+    if (gameArray[row][col] == '') {
+      gameArray[row][col] = currentPlayer.getSymbol();
       currentPlayer = currentPlayer === player1 ? player2 : player1;
+      DisplayController.displayBoard();
       DisplayController.displayTurn();
     }
   };
