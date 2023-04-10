@@ -54,6 +54,7 @@ header {
   font-size: 3rem;
   background-color: transparent;
   color: #333333;
+  transition: 0.5s;
 }
 
 .board :nth-child(2),
@@ -68,4 +69,9 @@ header {
 .board :nth-child(6) {
   border-top: solid 1px#333333;
   border-bottom: solid 1px#333333;
+}
+
+.board button.shrink {
+  color:rgb(0 0 0 / 24%);
+  font-size: 2rem;
 }
