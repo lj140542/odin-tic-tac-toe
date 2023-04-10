@@ -46,7 +46,7 @@ header {
 .board {
   justify-self: center;
   align-self: start;
-  margin-top: 10vh;
+  margin-top: 5vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
