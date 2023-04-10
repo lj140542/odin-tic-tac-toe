@@ -25,23 +25,25 @@ const DisplayController = (() => {
   };
   const displayVictory = (winningArray) => {
     turnDisplay.innerHTML = `${currentPlayer.getName()} wins !`;
-    console.log(winningArray);
     buttons.forEach(button => {
-      console.log(`id:${button.id} | index:${winningArray.indexOf(button.id)}`);
       if (winningArray.indexOf(button.id) == -1) {
         button.classList.toggle('shrink');
       }
     });
   };
-  return { displayBoard, displayTurn, displayVictory };
+  const displayDraw = () => {
+    turnDisplay.innerHTML = 'Draw !';
+    buttons.forEach(button => {
+      button.classList.toggle('shrink');
+    });
+  };
+  return { displayBoard, displayTurn, displayVictory, displayDraw };
 })();
 
 const GameBoard = (() => {
   let gameArray = [['', '', ''], ['', '', ''], ['', '', '']];
+  let turnCpt = 1;
   const getGameArray = () => gameArray;
-  const reset = () => {
-    gameArray = [];
-  };
   const turnPlayed = (buttonId) => {
     let button = document.getElementById(buttonId);
     let row = button.dataset.row - 1;
@@ -51,12 +53,18 @@ const GameBoard = (() => {
     if (gameArray[row][col] == '') {
       gameArray[row][col] = currentPlayer.getSymbol();
       DisplayController.displayBoard();
-      winningArray = checkVictory();
-      if (winningArray.length == 0) {
-        currentPlayer = currentPlayer === player1 ? player2 : player1;
-        DisplayController.displayTurn();
+      if (turnCpt == 9) {
+        DisplayController.displayDraw();
       }
-      else { DisplayController.displayVictory(winningArray); }
+      else {
+        turnCpt++;
+        winningArray = checkVictory();
+        if (winningArray.length == 0) {
+          currentPlayer = currentPlayer === player1 ? player2 : player1;
+          DisplayController.displayTurn();
+        }
+        else { DisplayController.displayVictory(winningArray); }
+      }
     }
   };
   const checkVictory = () => {
