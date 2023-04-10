@@ -9,9 +9,13 @@ const Player = (name, symbol) => {
 
 const DisplayController = (() => {
   const displayBoard = () => {
+    let buttonIndex = 0;
     let board = GameBoard.getGameArray();
-    board.forEach(function (cell, index) {
-      buttons[index].innerHTML = cell;
+    board.forEach(function (row) {
+      row.forEach(function (col) {
+        buttons[buttonIndex].innerHTML = col;
+        buttonIndex++;
+      })
     });
   };
   const resetBoard = () => {
@@ -26,10 +30,10 @@ const DisplayController = (() => {
 })();
 
 const GameBoard = (() => {
-  let GameArray = ['', '', '', '', '', '', '', '', ''];
-  const getGameArray = () => GameArray;
+  let gameArray = [['', '', ''], ['', '', ''], ['', '', '']];
+  const getGameArray = () => gameArray;
   const reset = () => {
-    GameArray = [];
+    gameArray = [];
   };
   const turnPlayed = (buttonId) => {
     button = document.getElementById(buttonId);
