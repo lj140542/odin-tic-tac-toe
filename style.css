@@ -81,3 +81,22 @@ header {
   color: rgb(0 0 0 / 24%);
   font-size: 2rem;
 }
+
+@media (max-width: 380px) {
+  header {
+    padding: 10px 0px 10px 0px;
+    justify-content: center;
+  }
+
+  #restart-instructions {
+    font-size: 0.8rem;
+  }
+
+  .board button {
+    font-size: 2.5rem;
+  }
+
+  .board button.shrink {
+    font-size: 1.5rem;
+  }
+}
