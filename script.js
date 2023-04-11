@@ -27,10 +27,10 @@ const DisplayController = (() => {
     turnDisplay.innerHTML = `${currentPlayer.getName()} wins !`;
     restartInstructions.classList.add('visible');
     buttons.forEach(button => {
+      button.removeEventListener('click', GameBoard.turnPlayed);
+      button.addEventListener('click', GameBoard.restart);
       if (winningArray.indexOf(button.id) == -1) {
         button.classList.toggle('shrink');
-        button.removeEventListener('click', GameBoard.turnPlayed);
-        button.addEventListener('click', GameBoard.restart);
       }
     });
   };
