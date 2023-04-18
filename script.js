@@ -65,18 +65,18 @@ const GameBoard = (() => {
     if (gameArray[row][col] == '') {
       gameArray[row][col] = currentPlayer.getSymbol();
       DisplayController.displayBoard();
-      if (turnCpt == 9) {
-        DisplayController.displayDraw();
-      }
-      else {
-        turnCpt++;
-        winningArray = checkVictory();
-        if (winningArray.length == 0) {
+      winningArray = checkVictory();
+      if (winningArray.length == 0) {
+        if (turnCpt == 9) {
+          DisplayController.displayDraw();
+        }
+        else {
+          turnCpt++;
           currentPlayer = currentPlayer === player1 ? player2 : player1;
           DisplayController.displayTurn();
         }
-        else { DisplayController.displayVictory(winningArray); }
       }
+      else { DisplayController.displayVictory(winningArray); }
     }
   };
   const checkVictory = () => {
