@@ -15,40 +15,44 @@
   <header>
     <h1>Odin's Tic Tac Toe</h1>
   </header>
-  <div class="board-container">
-    <div id="display">
-      <h1 id="display-turn">Player 1 turn</h1>
-      <p id="restart-instructions">(click on the board to restart the game)</p>
+  <div id="content">
+
+    <form id="players-configuration">
+      <div class="player">
+        <h1>PLAYER 1</h1>
+        <div class="input-box">
+          <input class="player-name" type="text" name="player-name1" id="player1-name" required>
+          <label for="player1-name">Name</label>
+        </div>
+      </div>
+      <div class="player">
+        <h1>PLAYER 2</h1>
+        <div class="input-box">
+          <input class="player-name" type="text" name="player-name2" id="player2-name" required>
+          <label for="player2-name">Name</label>
+        </div>
+      </div>
+      <button type="submit" id="start-button">Start</button>
+    </form>
+
+    <div id="board-container">
+      <div id="display">
+        <h1 id="display-turn">Player 1 turn</h1>
+        <p id="restart-instructions"></p>
+      </div>
+      <div class="board">
+        <button class="board-button" id="1" data-row="1" data-col="1"></button>
+        <button class="board-button" id="2" data-row="1" data-col="2"></button>
+        <button class="board-button" id="3" data-row="1" data-col="3"></button>
+        <button class="board-button" id="4" data-row="2" data-col="1"></button>
+        <button class="board-button" id="5" data-row="2" data-col="2"></button>
+        <button class="board-button" id="6" data-row="2" data-col="3"></button>
+        <button class="board-button" id="7" data-row="3" data-col="1"></button>
+        <button class="board-button" id="8" data-row="3" data-col="2"></button>
+        <button class="board-button" id="9" data-row="3" data-col="3"></button>
+      </div>
     </div>
-    <div class="board">
-      <button class="board-button" id="1" data-row="1" data-col="1">
 
-      </button>
-      <button class="board-button" id="2" data-row="1" data-col="2">
-
-      </button>
-      <button class="board-button" id="3" data-row="1" data-col="3">
-
-      </button>
-      <button class="board-button" id="4" data-row="2" data-col="1">
-
-      </button>
-      <button class="board-button" id="5" data-row="2" data-col="2">
-
-      </button>
-      <button class="board-button" id="6" data-row="2" data-col="3">
-
-      </button>
-      <button class="board-button" id="7" data-row="3" data-col="1">
-
-      </button>
-      <button class="board-button" id="8" data-row="3" data-col="2">
-
-      </button>
-      <button class="board-button" id="9" data-row="3" data-col="3">
-
-      </button>
-    </div>
   </div>
 </body>
 

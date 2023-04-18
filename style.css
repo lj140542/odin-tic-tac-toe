@@ -1,5 +1,9 @@
-body {
+* {
   font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
@@ -17,11 +21,132 @@ header {
   border-bottom: solid 1px #333333;
 }
 
-.board-container {
+#content {
+  display: flex;
+  justify-content: center;
+}
+
+/* ------------------------ */
+/*                          */
+/*   PLAYER CONFIGURATION   */
+/*                          */
+/* ------------------------ */
+
+#players-configuration {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30vw, 350px));
+  grid-template-rows: 1fr;
+  grid-auto-rows: auto;
+  justify-content: center;
+  align-self: center;
+  position: absolute;
+  top: 30%;
+  width: 90%;
+  transform: translate(0vw) scale(1);
+  transition: 1s ease-out;
+  gap: 20px;
+}
+
+#players-configuration.hide {
+  transform: translate(-100vw) scale(0);
+}
+
+.player {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 30vh;
+  background: transparent;
+  border-radius: 20px;
+}
+
+.player h2 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.input-box {
+  position: relative;
+  width: 95%;
+  height: 50px;
+  border-bottom: 2px solid #333333;
+  margin: 30px 0;
+}
+
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  font-weight: 500;
+  pointer-events: none;
+  color: #333333;
+  transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+  top: -5px;
+}
+
+.input-box input {
+  width: 95%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0 35px 0 5px
+}
+
+#start-button {
+  grid-column: 1 / 3;
+  width: 60%;
+  justify-self: center;
+  height: 2rem;
+  background-color: white;
+  color: #333333;
+  box-shadow: rgb(0 0 0 / 24%) 0px 1px 2px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: .3s;
+}
+
+#start-button:hover {
+  transform: scale(1.02);
+}
+
+#start-button:active {
+  transform: scale(1);
+}
+
+/* ------------------- */
+/*                     */
+/*   BOARD CONTAINER   */
+/*                     */
+/* ------------------- */
+
+#board-container {
+  position: absolute;
+  top: 20%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
   justify-content: center;
+  transform: translateX(100vw) scale(0);
+  transition: 1s ease-out;
+}
+
+#board-container.visible {
+  transform: translate(0vw) scale(1);
 }
 
 #display {
@@ -34,6 +159,9 @@ header {
 }
 
 #restart-instructions {
+  position: absolute;
+  width: max-content;
+  top: 5rem;
   margin: 0px;
   transform: scale(0);
   transition: 0.3s;
@@ -82,10 +210,32 @@ header {
   font-size: 2rem;
 }
 
-@media (max-width: 380px) {
+/* --------- */
+/*           */
+/*   MEDIA   */
+/*           */
+/* --------- */
+
+@media (max-width: 800px) {
   header {
     padding: 10px 0px 10px 0px;
     justify-content: center;
+  }
+
+  #players-configuration {
+    top: 20%;
+  }
+
+  .player {
+    height: 25vh;
+  }
+
+  #start-button {
+    grid-column: 1 / 2;
+  }
+
+  #board-container {
+    top: 20vh;
   }
 
   #restart-instructions {

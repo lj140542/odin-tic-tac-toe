@@ -1,7 +1,8 @@
 const Player = (name, symbol) => {
   const getName = () => name;
   const getSymbol = () => symbol;
-  return { name, symbol, getName, getSymbol };
+  const setName = (newName) => name = newName;
+  return { name, symbol, getName, getSymbol, setName };
 };
 
 const DisplayController = (() => {
@@ -21,10 +22,11 @@ const DisplayController = (() => {
     });
   };
   const displayTurn = () => {
-    turnDisplay.innerHTML = `${currentPlayer.getName()} turn`;
+    turnDisplay.innerHTML = `${currentPlayer.getName()}'s turn`;
   };
   const displayVictory = (winningArray) => {
     turnDisplay.innerHTML = `${currentPlayer.getName()} wins !`;
+    restartInstructions.innerHTML = '(click on the board to restart the game)';
     restartInstructions.classList.add('visible');
     buttons.forEach(button => {
       button.removeEventListener('click', GameBoard.turnPlayed);
@@ -36,6 +38,7 @@ const DisplayController = (() => {
   };
   const displayDraw = () => {
     turnDisplay.innerHTML = 'Draw !';
+    restartInstructions.innerHTML = '(click on the board to restart the game)';
     restartInstructions.classList.add('visible');
     buttons.forEach(button => {
       button.classList.toggle('shrink');
@@ -47,6 +50,8 @@ const DisplayController = (() => {
 })();
 
 const GameBoard = (() => {
+  const player1 = Player('Player 1', 'X');
+  const player2 = Player('Player 2', 'O');
   let gameArray = [['', '', ''], ['', '', ''], ['', '', '']];
   let turnCpt = 1;
   const getGameArray = () => gameArray;
@@ -113,6 +118,7 @@ const GameBoard = (() => {
     turnCpt = 1;
     currentPlayer = player1;
 
+    restartInstructions.innerHTML = '';
     restartInstructions.classList.remove('visible');
     buttons.forEach(button => {
       button.classList.remove('shrink');
@@ -124,19 +130,39 @@ const GameBoard = (() => {
     DisplayController.displayBoard();
 
   };
-  return { getGameArray, turnPlayed, restart };
+  const start = (e) => {
+    let name1 = document.getElementById('player1-name');
+    let name2 = document.getElementById('player2-name');
+
+    // prevent further processing until both names are entered
+    if (name1.value == '' || name2.value == '') {
+      return false;
+    }
+
+    player1.setName(name1.value);
+    player2.setName(name2.value);
+    currentPlayer = player1;
+
+    DisplayController.displayTurn();
+    DisplayController.displayBoard();
+
+    boardContainer.classList.toggle('visible');
+    playersConfiguration.classList.toggle('hide');
+
+    e.preventDefault();
+  };
+  return { getGameArray, turnPlayed, restart, start };
 })();
 
 const buttons = Array.from(document.getElementsByClassName('board-button'));
 const turnDisplay = document.getElementById('display-turn');
 const restartInstructions = document.getElementById('restart-instructions');
-const player1 = Player('Player 1', 'X');
-const player2 = Player('Player 2', 'O');
-let currentPlayer = player1;
+const playersConfiguration = document.getElementById('players-configuration');
+const startButton = document.getElementById('start-button');
+const boardContainer = document.getElementById('board-container');
+let currentPlayer;
 
 buttons.forEach(button => {
   button.addEventListener('click', GameBoard.turnPlayed);
 });
-
-DisplayController.displayTurn();
-DisplayController.displayBoard();
+startButton.addEventListener('click', e => GameBoard.start(e));
