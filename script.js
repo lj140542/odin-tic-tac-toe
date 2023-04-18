@@ -116,7 +116,7 @@ const GameBoard = (() => {
   const restart = () => {
     gameArray = [['', '', ''], ['', '', ''], ['', '', '']];
     turnCpt = 1;
-    currentPlayer = player1;
+    currentPlayer = getRandomPlayer();
 
     restartInstructions.innerHTML = '';
     restartInstructions.classList.remove('visible');
@@ -141,7 +141,7 @@ const GameBoard = (() => {
 
     player1.setName(name1.value);
     player2.setName(name2.value);
-    currentPlayer = player1;
+    currentPlayer = getRandomPlayer();
 
     DisplayController.displayTurn();
     DisplayController.displayBoard();
@@ -150,6 +150,9 @@ const GameBoard = (() => {
     playersConfiguration.classList.toggle('hide');
 
     e.preventDefault();
+  };
+  const getRandomPlayer = () => {
+    return Math.floor(Math.random() * 2) == 0 ? player1 : player2;
   };
   return { getGameArray, turnPlayed, restart, start };
 })();
